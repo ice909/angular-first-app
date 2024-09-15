@@ -17,12 +17,13 @@ export class HomeComponent {
   housingService = inject(HousingService)
 
   constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations()
-    this.filteredLocationList = this.housingLocationList
+    this.housingService.getAllHousingLocations().then((housingLocationList: HousingLocation[]) => {
+      this.housingLocationList = housingLocationList
+      this.filteredLocationList = this.housingLocationList
+    })
   }
 
   filterResult(text: string) {
-    console.log(text)
     if (!text) {
       this.filteredLocationList = this.housingLocationList
       return
